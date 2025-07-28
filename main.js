@@ -6,15 +6,15 @@ const textoResultado = document.querySelector(".texto-resultado");
 
 const perguntas = [
     {
-        enunciado: "Pergunta 1",
+        enunciado: "Você é um jovem marinheiro em busca dos tesouros perdidos",
         alternativas: [
             {
-                texto: "alternativa 01",
-                afirmacao: "resultado 01"
+                texto: "Você gosta de aventuras e vai em direção aos redemoinhos azuis..",
+                afirmacao: " Grandes tsouros te esperam depois dos redemoinhos "
             },
             {
-                texto: "alternativa 02",
-                afirmacao: "resultado 02"
+                texto: "Vcê é um cara tranquilo e prefere a praia de esmeralda",
+                afirmacao: " Aquela praaia parecia tão tranquila com aquela areia esmeralda, maass você seguinte"
             }
         ]
     },
@@ -64,9 +64,14 @@ let perguntaAtual;
 let historiaFinal = "";
 
 function mostraPergunta(){
+    if(atual >= perguntas.length){
+        mostreResultado();
+        return;
+    }
     perguntaAtual = perguntas[atual]
     caixaPerguntas.textContent = perguntaAtual.enunciado
-    mostraAlternativas()
+    caixaAlternativas.textContent= ""
+    mostraAlternativas();
 }
 
 function mostraAlternativas(){
@@ -79,8 +84,16 @@ function mostraAlternativas(){
 }
 
 function respostaSelecionada(opcaoSelecionada){
+    const afirmacao = opcaoSelecionada.afirmacao;
+    historiaFinal += afirmacao + " "
     atual++
     mostraPergunta();
+}
+
+function mostreResultado(){
+    caixaPerguntas.textContent = " Tudo começou... ";
+    textoResultado.textContent = historiaFinal;
+    caixaAlternativas.textContent = "";
 }
 
 mostraPergunta();
